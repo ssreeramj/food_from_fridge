@@ -6,4 +6,4 @@ __pycache__/
 food_6000.csv
 food_6000.xlsx
 
-
+*.ipynb
