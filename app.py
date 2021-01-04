@@ -8,6 +8,10 @@ from sklearn.metrics.pairwise import cosine_similarity
 import food_recomm
 import recipe_finder
 
+st.set_page_config(
+    page_title="FFF",
+    page_icon=':pizza:'
+)
 
 @st.cache()
 def fetch_and_clean_data(file_path):
