@@ -5,6 +5,9 @@ import pandas as pd
 import streamlit as st
 from sklearn.metrics.pairwise import cosine_similarity
 
+import food_recomm
+import recipe_finder
+
 
 @st.cache()
 def fetch_and_clean_data(file_path):
@@ -32,36 +35,17 @@ def fetch_and_clean_data(file_path):
     return new_df
 
 
-def embed_query(query, it):
-    embedding = np.zeros((365,), dtype=int)
-    
-    for q in query:
-        idx = np.where(q == it)
-        embedding[idx] = 1
-
-    return embedding
-
 data = fetch_and_clean_data('food_250.csv')
-st.title('Food From Fridge')
 
-available_items = st.multiselect(
-    label = 'Select items that are available with you',
-    options = data.columns[2:],
+PAGES = {
+    'Recipe Finder': recipe_finder,
+    'Food Recommender': food_recomm
+}
+
+page = st.sidebar.radio(
+    label='Contents',
+    options=list(PAGES.keys())
 )
 
-submit = st.button('Submit')
-
-if submit:
-    st.header('You can try to make these recipes')
-    with st.spinner('Searching for recipes'):
-        # time.sleep(3)
-        emb_qy = embed_query(available_items, data.columns[2:].values)
-        sim = cosine_similarity(data.iloc[:, 2:].values.reshape(255, -1), emb_qy.reshape(1, -1)).ravel()
-
-        idx_sorted = np.argsort(sim)[::-1]
-
-        for val, idx in np.column_stack((sim[idx_sorted], idx_sorted)):
-            if val > 0:
-                st.info(f'**{data.iloc[int(idx), 0]}** ({data.iloc[int(idx), 1]})')
-                # st.subheader(data.iloc[int(idx), 0])
-                # st.write(f'Ingredients = {data.iloc[int(idx), 1]}')
+content = PAGES[page]
+content.app(data)
