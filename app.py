@@ -51,5 +51,9 @@ page = st.sidebar.radio(
     options=list(PAGES.keys())
 )
 
+with st.sidebar.beta_expander("Source Code"):
+    st.write("https://github.com/ssreeramj/food_from_fridge")
+
+
 content = PAGES[page]
 content.app(data)
