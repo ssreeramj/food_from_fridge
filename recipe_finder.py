@@ -10,7 +10,7 @@ from helper import embed_query
 def app(data):
     st.title('Food From Fridge:fire:')
 
-    st.image('items_image.jpg', use_column_width=True)
+    st.image('images/items_image.jpg', use_column_width=True)
 
     available_items = st.multiselect(
         label = 'Select items that are available with you',

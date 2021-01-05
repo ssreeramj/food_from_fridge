@@ -10,7 +10,7 @@ def app(data):
 
     st.header('Enter items that you love very much and this recommender will suggest you different food items that you might like')
 
-    st.image('food_image.png', use_column_width=True)
+    st.image('images/food_image.png', use_column_width=True)
 
     fav_food = st.multiselect(
         label='Choose your favourite food items',

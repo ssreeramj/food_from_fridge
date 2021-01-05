@@ -39,7 +39,7 @@ def fetch_and_clean_data(file_path):
     return new_df
 
 
-data = fetch_and_clean_data('food_250.csv')
+data = fetch_and_clean_data('data/food_250.csv')
 
 PAGES = {
     'Recipe Finder': recipe_finder,
